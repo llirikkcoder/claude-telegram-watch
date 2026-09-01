@@ -1,0 +1,6 @@
+{
+  "name": "telegram-watch",
+  "description": "Показывает в строке статуса, доходят ли сообщения Telegram-канала до этой сессии, и чинит конфликт нескольких экземпляров бота. Команды /tgbot и /tg-fix.",
+  "version": "1.0.0",
+  "keywords": ["telegram", "channel", "statusline", "diagnostics"]
+}
