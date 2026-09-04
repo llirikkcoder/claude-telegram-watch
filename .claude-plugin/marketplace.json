@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-telegram-watch",
+  "owner": {
+    "name": "llirikkcoder"
+  },
+  "plugins": [
+    {
+      "name": "telegram-watch",
+      "description": "Показывает в строке статуса, доходят ли сообщения Telegram-канала до этой сессии, и чинит конфликт нескольких экземпляров бота. Команды /tgbot, /tg-fix, /tg-remember.",
+      "source": "./"
+    }
+  ]
+}
