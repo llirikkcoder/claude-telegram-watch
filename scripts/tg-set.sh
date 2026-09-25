@@ -61,7 +61,10 @@ describe_session() {
 # Канал считается настроенным, если в его каталоге лежит .env с токеном.
 молчащие() {
   local занято="$1" d
-  for d in $HOME/.claude/channels/*(N/); do
+  # -N: симлинки пропускаем. channels/telegram — путь по умолчанию, и его
+  # удобно держать ссылкой на канал с говорящим именем. Считать псевдоним
+  # отдельным каналом значит ругаться на собственную же аккуратность.
+  for d in $HOME/.claude/channels/*(N/^@); do
     [[ -f $d/.env ]] || continue
     grep -q 'TELEGRAM_BOT_TOKEN=' $d/.env 2>/dev/null || continue
     [[ " $занято " == *" ${d:t} "* ]] && continue
@@ -79,7 +82,8 @@ describe_session() {
 # Сравниваем отпечатки, а не токены: токен в выводе — это утечка доступа.
 дубли_токенов() {
   local d t
-  for d in $HOME/.claude/channels/*(N/); do
+  # Симлинки пропускаем по той же причине: псевдоним не задвоение.
+  for d in $HOME/.claude/channels/*(N/^@); do
     [[ -f $d/.env ]] || continue
     t=$(grep -oE '[0-9]{8,}:[A-Za-z0-9_-]+' $d/.env 2>/dev/null | head -1)
     [[ -n $t ]] && print -- "${t%%:*} ${d:t}"
